@@ -12,11 +12,12 @@ public class Scalaire {
 	protected int evalActuelle ;
 	protected boolean first ;
 	
-	public Scalaire(Probleme p, int[] lesPoids, ArrayList<Integer> solutionInitiale,boolean first) {
+	public Scalaire(Probleme p,Voisinage voisinage, int[] lesPoids, ArrayList<Integer> solutionInitiale,boolean first) {
 		this.probleme = p ;
 		this.lesPoids = lesPoids ;
+		this.voisinage = voisinage ;
 		this.solutionActuelle = solutionInitiale ;
-		this.voisinage = voisinage.init(this.solutionActuelle) ;
+		this.voisinage.init(this.solutionActuelle) ;
 		int[] evalTmp = this.probleme.eval(solutionInitiale);
 		this.evalActuelle = this.sommePondere(evalTmp);
 		this.first = first ;
