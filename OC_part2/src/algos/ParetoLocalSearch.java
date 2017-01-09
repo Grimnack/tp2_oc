@@ -41,29 +41,34 @@ public class ParetoLocalSearch {
 	}
 	
 	public ArrayList<Solution> run(){
-		while(true){
+		long startTime = System.currentTimeMillis();
+		while(System.currentTimeMillis() - startTime < 300000){
 			// On selectionne au hasard une solution du pareto
 			Solution solutionActuelle = randomSelect(pareto);
 			if(solutionActuelle == null){
 				break; // on a visité toutes les solutions.
 			}
-			this.voisinage.init(solutionActuelle);
+			this.voisinage.init(solutionActuelle.permutation);
 			solutionActuelle.setVisitedTrue();
 			while(this.voisinage.hasnext()){
-				Solution solutionCandidate =(Solution) voisinage.next();
+				ArrayList<Integer> solutionCandidate = voisinage.next();
 				int[] evalCandidat = this.probleme.eval(solutionCandidate);
 				boolean dominated = false ;
+				ArrayList<Solution> toRemove = new ArrayList<Solution>() ;
 				for (Solution solution : pareto) {
-					int[] evalPareto = this.probleme.eval(solution) ;
+					int[] evalPareto = this.probleme.eval(solution.permutation) ;
 					if(domine(evalCandidat,evalPareto)){
-						this.pareto.remove(solution);
+						toRemove.add(solution);
 					}else if(domine(evalPareto,evalCandidat)){
 						dominated = true ;
 						break ;
 					}
 				}
+				for (Solution solution : toRemove){
+					pareto.remove(solution);
+				}
 				if(!dominated){
-					pareto.add(solutionCandidate);
+					pareto.add(new Solution(solutionCandidate));
 				}
 				
 			}

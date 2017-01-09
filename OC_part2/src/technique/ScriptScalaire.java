@@ -21,8 +21,8 @@ public class ScriptScalaire {
 				couple[1] = lesPathnames[j] ;
 				Probleme probleme = new TSP(couple, 100);
 				ArrayList<ArrayList<Integer>> lesSolutions = new ArrayList<ArrayList<Integer>>() ;
-				for(int k = 0; k <= 10 ; k ++){
-					int[] lesPoids = new int[2] ;
+				for(double k = 0; k <= 10 ; k ++){
+					double[] lesPoids = new double[2] ;
 					lesPoids[0] = k/10 ;
 					lesPoids[1] = 1 - k/10; 
 					Scalaire scalaire = new Scalaire(probleme,new TwoOpt(), lesPoids, probleme.permutationAleatoire(), true);

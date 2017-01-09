@@ -6,13 +6,13 @@ import probleme.Probleme;
 
 public class Scalaire {
 	protected Probleme probleme ;
-	protected int[] lesPoids ;
+	protected double[] lesPoids ;
 	protected Voisinage voisinage ;
 	protected ArrayList<Integer> solutionActuelle ;
 	protected int evalActuelle ;
 	protected boolean first ;
 	
-	public Scalaire(Probleme p,Voisinage voisinage, int[] lesPoids, ArrayList<Integer> solutionInitiale,boolean first) {
+	public Scalaire(Probleme p,Voisinage voisinage, double[] lesPoids, ArrayList<Integer> solutionInitiale,boolean first) {
 		this.probleme = p ;
 		this.lesPoids = lesPoids ;
 		this.voisinage = voisinage ;
@@ -58,7 +58,7 @@ public class Scalaire {
 	private int sommePondere(int[] evalVoisinMulti) {
 		int result = 0 ;
 		for (int i = 0; i < evalVoisinMulti.length; i++) {
-			result += (evalVoisinMulti[i] * this.lesPoids[i]) ;
+			result += (int)((double) evalVoisinMulti[i] * this.lesPoids[i]) ;
 		}
 		return result;
 	}
